@@ -29,7 +29,7 @@ end
 # unset irrelevant variables
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/akshay/Documents/Flask_Projects/Multi-Room-Web-Chat/api/venv"
+set -gx VIRTUAL_ENV "/home/akshay/Documents/Flask_Projects/Multi-Room-Web-Chat/flask-react-twilio-chat/api/venv"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

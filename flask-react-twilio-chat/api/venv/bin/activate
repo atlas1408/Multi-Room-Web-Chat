@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/home/akshay/Documents/Flask_Projects/Multi-Room-Web-Chat/api/venv"
+VIRTUAL_ENV="/home/akshay/Documents/Flask_Projects/Multi-Room-Web-Chat/flask-react-twilio-chat/api/venv"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
