@@ -55,7 +55,6 @@ def login():
 	if not username:
 		abort(401)
 
-	# create user if it does not exist
 	participant_role_sid = None
 	for role in twilio_client.conversations.roles.list():
 		if role.friendly_name == 'participant':
@@ -66,7 +65,6 @@ def login():
 		if exc.status!=409:
 			raise
 
-	# add the user to all conversations
 	conversations = twilio_client.conversations.conversations.list()
 	for conversation in conversations:
 		try:
@@ -75,7 +73,6 @@ def login():
 			if exc!=409:
 				raise
 
-	# generate an access token
 	twilio_account_sid = os.environ.get('TWILIO_ACCOUNT_SID')
 	twilio_api_key_sid = os.environ.get('TWILIO_API_KEY_SID')
 	twilio_api_key_secret = os.environ.get('TWILIO_API_KEY_SECRET')
@@ -83,7 +80,6 @@ def login():
 	token = AccessToken(twilio_account_sid, twilio_api_key_sid, twilio_api_key_secret, identify=username)
 	token.add_grant(ChatGrant(service_sid = service_sid))
 
-	#send a response
 	return {
 	'chatrooms': [[conversation.friendly_name, conversation.sid] for conversation in conversations],
 	'token': token.to_jwt().decode(),
