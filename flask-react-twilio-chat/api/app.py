@@ -21,3 +21,28 @@ def list():
 	conversations = twilio_client.conversations.conversations.list()
 	for conversation in conversations:
 		print(f'{conversation.friendly_name} ({conversation.sid})')
+
+@chatrooms_cli.command('create',help='Create a chat room.')
+@click.argument('name')
+def create(name):
+	conversation = None
+	for conv in twilio_client.conversations.conversations.list():
+		if conv.friendly_name == name:
+			conversation = conv
+			break
+	if conversation:
+		print("Chat room already exists")
+	else:
+		twilio_client.conversations.conversations.create(friendly_name=name)
+
+@chatrooms_cli.command('delete',help='Delete a chat room.')
+@click.argument('name')
+def delete(name):
+	for conv in twilio_client.conversations.conversations.list():
+		if conv.friendly_name == name:
+			conversation = conv
+			break
+	if not conv:
+		print("Chat room not found")
+	else:
+		conversation.delete()
